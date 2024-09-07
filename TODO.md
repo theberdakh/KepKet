@@ -1,11 +1,11 @@
-[+] login
-[+] get all orders 
-[ ] get all dishes
-[ ] get all category to chips 
-[ ] get all table 
-[ ] create order
-[ ] get order by id 
-[ ] get all calls 
+- [x] login 
+- [x] get all orders 
+- [ ] get all dishes
+- [ ] get all category to chips 
+- [ ] get all table 
+- [ ] create order
+- [ ] get order by id 
+- [ ] get all calls 
 
 
 
