@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_margin="@dimen/normal_100"
+    android:padding="@dimen/normal_100"
+    android:background="@drawable/bg_search_bar">
+
+    <FrameLayout
+        android:layout_width="@dimen/logo_width"
+        android:background="@drawable/bg_search_bar"
+        android:backgroundTint="@color/light_azure"
+        android:layout_height="@dimen/logo_height">
+
+        <TextView
+            android:id="@+id/tableNumber"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.KepKet.Black"
+            tools:text="No 18"
+            android:textStyle="bold"
+            />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_100"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="18"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.KepKet.Black"/>
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="18"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/light_gray"
+            android:textAppearance="@style/TextAppearance.KepKet.Black"/>
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="18"
+            android:textColor="@color/bright_green"
+            android:textAppearance="@style/TextAppearance.KepKet.Black"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

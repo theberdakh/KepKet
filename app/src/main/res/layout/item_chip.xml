@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_chip_unselected"
+    android:paddingHorizontal="@dimen/small_100"
+    android:paddingVertical="@dimen/small_50"
+    android:layout_margin="@dimen/small_100"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:layout_width="28dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_search"
+        android:layout_height="28dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.KepKet.Black"
+        android:text="Hámmesi"/>
+
+</LinearLayout>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="@dimen/normal_100"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/bg_rounded_stroke"
+        android:layout_margin="@dimen/normal_200"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/logo_width"
+            android:layout_height="@dimen/logo_height"
+            android:layout_gravity="center"
+            android:src="@drawable/logo"
+            android:contentDescription="@string/cd_logo"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginVertical="@dimen/normal_100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.KepKet.Black"
+                android:textColor="@color/bright_green"
+                android:text="@string/login_to_account"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.KepKet.Black"
+                android:text="@string/enter_your_username_and_password" />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textAppearance="@style/TextAppearance.KepKet.Black"
+            android:text="@string/title_username" />
+
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="username"
+            android:inputType="text"
+            android:textAppearance="@style/TextAppearance.KepKet.Black"
+            android:hint="@string/hint_username"
+            android:background="@drawable/bg_rounded_stroke"
+            android:layout_marginVertical="@dimen/small_100"
+            android:padding="@dimen/small_100" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:textAppearance="@style/TextAppearance.KepKet.Black"/>
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="password"
+            android:inputType="textPassword"
+            android:textAppearance="@style/TextAppearance.KepKet.Black"
+            android:hint="@string/hint_username"
+            android:background="@drawable/bg_rounded_stroke"
+            android:layout_marginVertical="@dimen/small_100"
+            android:padding="@dimen/small_100" />
+
+
+        <FrameLayout
+            android:id="@+id/signInLoginBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/bg_rounded_gradient_button"
+            android:layout_marginVertical="@dimen/normal_100"
+            android:padding="@dimen/small_100">
+
+            <TextView
+                android:id="@+id/loginText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.KepKet.Black"
+                android:fontFamily="@font/dm_sans_medium"
+                android:text="@string/title_login"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <ProgressBar
+                android:id="@+id/loginProgress"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/large_100"
+                android:indeterminate="true"
+                android:indeterminateTintMode="src_atop"
+                android:indeterminateTint="@color/white" />
+
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

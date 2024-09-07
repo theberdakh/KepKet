@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.KepKet.Black" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/dm_sans_medium</item>
+    </style>
+</resources>

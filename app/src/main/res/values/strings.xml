@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">KepKet</string>
+    <string name="cd_logo">Logo</string>
+    <string name="title_login">Kiriw</string>
+    <string name="title_username">Paydalanıwshı atı</string>
+    <string name="hint_username">Username</string>
+    <string name="password">Password</string>
+    <string name="enter_your_username_and_password">Kiriw ushın paydalanıwshı atıńız hám parolińizdi kiritiń.</string>
+    <string name="login_to_account">Akkountqa kiriw</string>
+    <string name="cd_add">Add button</string>
+    <string name="order">Buyırtpa</string>
+    <string name="menu">Menyu</string>
+    <string name="hint_search">Izlew</string>
+    <string name="cd_food_image">Food image</string>
+</resources>

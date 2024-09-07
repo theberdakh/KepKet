@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_toolbar_white"
+        app:title="@string/app_name" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshOrders"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="76dp"
+        android:background="@drawable/bg_list_container">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvOrders"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <ImageButton
+        android:id="@+id/fabAdd"
+        android:layout_width="@dimen/fab_width"
+        android:layout_height="@dimen/fab_height"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/normal_100"
+        android:background="@drawable/bg_oval_fab_add"
+        android:contentDescription="@string/cd_add"
+        android:src="@drawable/ic_vector_add" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
