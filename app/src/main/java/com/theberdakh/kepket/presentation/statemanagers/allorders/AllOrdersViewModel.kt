@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.theberdakh.kepket.data.local.LocalPreferences
 import com.theberdakh.kepket.data.remote.models.ResultModel
 import com.theberdakh.kepket.data.remote.models.Status
+import com.theberdakh.kepket.data.remote.models.errorMessage
 import com.theberdakh.kepket.data.remote.models.login.LoginResponse
 import com.theberdakh.kepket.data.remote.models.notifications.OrderResponse
 import com.theberdakh.kepket.data.remote.models.notifications.toOrderItem
@@ -57,11 +58,16 @@ class AllOrdersViewModel(
                 }.collect { orderResponse ->
                     when (orderResponse.status) {
                         Status.SUCCESS -> {
+                            Log.d("Order", "Success")
                             val orderItems = mutableListOf<OrderItem>()
+                            orderResponse.data?.forEach { order ->
+                                val orderItem = order.toOrderItem()
+                                orderItems.add(orderItem)
+                            }
+
                             if (orderResponse.data != null){
                                 println(orderResponse.data)
                             }
-
 
                             _waiterOrdersState.value = NetworkState(
                                 isLoading = false,
@@ -70,6 +76,7 @@ class AllOrdersViewModel(
                         }
 
                         Status.ERROR -> {
+                            Log.d("Order", "Error: ${orderResponse.errorThrowable?.errorMessage}")
                             _waiterOrdersState.value = NetworkState(
                                 isLoading = false,
                                 orderResponse.errorThrowable?.let { ResultModel.error(it) }

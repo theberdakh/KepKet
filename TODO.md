@@ -1,5 +1,5 @@
 [+] login
-[ ] get all orders 
+[+] get all orders 
 [ ] get all dishes
 [ ] get all category to chips 
 [ ] get all table 

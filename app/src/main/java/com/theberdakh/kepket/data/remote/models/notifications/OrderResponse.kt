@@ -3,6 +3,7 @@ package com.theberdakh.kepket.data.remote.models.notifications
 import com.google.gson.annotations.SerializedName
 import com.theberdakh.kepket.presentation.models.OrderItem
 
+
 data class OrderResponse(
     @SerializedName("__v")
     val v: Int,

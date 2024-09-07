@@ -7,7 +7,7 @@ import com.theberdakh.kepket.presentation.models.OrderItem
 class OrderItemViewHolder(private val binding: ItemOrderBinding): RecyclerView.ViewHolder(binding.root) {
 
     fun bind(orderItem: OrderItem){
-        binding.title.text = orderItem.meals.joinToString {", "}
+        binding.title.text = orderItem.meals.joinToString(separator = ", ")
         binding.subtitle.text = orderItem.status
         binding.tableNumber.text = orderItem.tableNumber.toString()
     }

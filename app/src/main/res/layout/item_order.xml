@@ -21,6 +21,7 @@
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.KepKet.Black"
             tools:text="No 18"
+            android:textSize="24sp"
             android:textStyle="bold"
             />
 

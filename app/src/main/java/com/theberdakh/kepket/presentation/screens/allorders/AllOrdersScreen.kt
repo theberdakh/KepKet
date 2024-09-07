@@ -27,22 +27,19 @@ class AllOrdersScreen: Fragment(R.layout.screen_all_orders) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        binding.swipeRefreshOrders.setOnRefreshListener {
-            allOrdersViewModel.getWaiterOrders()
-            orderItemAdapter.submitList(null)
-            binding.swipeRefreshOrders.isRefreshing = false
-        }
+        initObservers()
 
         binding.rvOrders.adapter = orderItemAdapter
+        binding.swipeRefreshOrders.setOnRefreshListener { actionRefresh() }
+        binding.fabAdd.setOnClickListener { requireActivity().supportFragmentManager.addFragmentToBackStack(R.id.main, AllFoodScreen.newInstance()) }
 
-        binding.fabAdd.setOnClickListener {
-            requireActivity().supportFragmentManager.addFragmentToBackStack(R.id.main, AllFoodScreen.newInstance())
-        }
+    }
 
+    private fun initObservers() {
         allOrdersViewModel.getWaiterOrders()
         allOrdersViewModel.waiterOrdersState.onEach {
-            orderResponseNetworkState ->
+                orderResponseNetworkState ->
+
             if(orderResponseNetworkState.isLoading){
                 binding.swipeRefreshOrders.isRefreshing = true
             }
@@ -52,7 +49,7 @@ class AllOrdersScreen: Fragment(R.layout.screen_all_orders) {
                     Status.SUCCESS -> {
                         Log.d("Orders", "${orderResponseNetworkState.result}")
                         orderItemAdapter.submitList(orderResponseNetworkState.result.data)
-                       binding.swipeRefreshOrders.isRefreshing = false
+                        binding.swipeRefreshOrders.isRefreshing = false
                     }
                     Status.ERROR -> {
                         Toast.makeText(requireContext(), orderResponseNetworkState.result.errorThrowable?.errorMessage, Toast.LENGTH_SHORT).show()
@@ -60,8 +57,13 @@ class AllOrdersScreen: Fragment(R.layout.screen_all_orders) {
                     }
                 }
             }
-       }.launchIn(viewLifecycleOwner.lifecycleScope)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+    }
 
+    private fun actionRefresh() {
+        allOrdersViewModel.getWaiterOrders()
+        orderItemAdapter.submitList(null)
+        binding.swipeRefreshOrders.isRefreshing = false
     }
 
     companion object {
