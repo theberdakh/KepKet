@@ -4,6 +4,7 @@ import com.theberdakh.kepket.data.remote.models.category.CategoryResponse
 import com.theberdakh.kepket.data.remote.models.login.LoginRequest
 import com.theberdakh.kepket.data.remote.models.login.LoginResponse
 import com.theberdakh.kepket.data.remote.models.notifications.OrderResponse
+import com.theberdakh.kepket.data.remote.models.table.TableResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -21,4 +22,8 @@ interface KepKetApi {
 
     @GET("api/notifications/{waiterId}")
     suspend fun getWaiterOrders(@Path("waiterId") waiterID: String): List<OrderResponse>
+
+    @GET("api/table/all-tables/{restaurantId}")
+    suspend fun getAllTables(@Path("restaurantId") restaurantId: String): List<TableResponse>
+
 }

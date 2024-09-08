@@ -11,15 +11,33 @@ import com.theberdakh.kepket.data.remote.models.Status
 import com.theberdakh.kepket.data.remote.models.errorMessage
 import com.theberdakh.kepket.databinding.ScreenAllFoodBinding
 import com.theberdakh.kepket.presentation.adapters.ChipItemAdapter
+import com.theberdakh.kepket.presentation.models.TableItem
 import com.theberdakh.viewbinding.viewBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+private const val ARG_TABLE_ID = "TABLE_ID"
+private const val ARG_TABLE_NUMBER = "TABLE_NUMBER"
+
 class AllFoodScreen: Fragment(R.layout.screen_all_food) {
     private val binding by viewBinding<ScreenAllFoodBinding>()
     private val chipItemAdapter by lazy { ChipItemAdapter() }
     private val viewModel by viewModel<AllFoodScreenViewModel>()
+
+    private var tableId: String? = null
+    private var tableNumber: Int? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            tableId = it.getString(ARG_TABLE_ID)
+            tableNumber = it.getInt(ARG_TABLE_NUMBER)
+        }
+
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,8 +48,13 @@ class AllFoodScreen: Fragment(R.layout.screen_all_food) {
 
         binding.rvChips.adapter = chipItemAdapter
 
-        initObservers()
 
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initObservers()
     }
 
     private fun initObservers() {
@@ -50,8 +73,13 @@ class AllFoodScreen: Fragment(R.layout.screen_all_food) {
     }
 
     companion object {
-        fun newInstance(): AllFoodScreen {
-            return AllFoodScreen()
-        }
+
+        @JvmStatic
+        fun newInstance(tableItem: TableItem) = AllFoodScreen().apply {
+                arguments = Bundle().apply {
+                    putCharSequence(ARG_TABLE_ID, tableItem.id)
+                    putInt(ARG_TABLE_NUMBER, tableItem.tableNumber)
+                }
+            }
     }
 }

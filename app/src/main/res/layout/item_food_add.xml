@@ -45,13 +45,13 @@
             tools:text="40.000"/>
 
         <ImageButton
-            android:id="@+id/fabAdd"
+            android:id="@+id/btnAdd"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="end"
             android:background="@drawable/bg_food_add_button"
             android:contentDescription="@string/cd_add"
-            android:src="@drawable/ic_vector_add" />
+            android:src="@drawable/ic_add" />
 
 
     </LinearLayout>

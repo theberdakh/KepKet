@@ -12,6 +12,7 @@ import com.theberdakh.kepket.data.remote.models.errorMessage
 import com.theberdakh.kepket.databinding.ScreenAllOrdersBinding
 import com.theberdakh.kepket.presentation.adapters.OrderItemAdapter
 import com.theberdakh.kepket.presentation.screens.allfoods.AllFoodScreen
+import com.theberdakh.kepket.presentation.screens.table.AllTableFragment
 import com.theberdakh.navigation.NavigationExtensions.addFragmentToBackStack
 import com.theberdakh.viewbinding.viewBinding
 import kotlinx.coroutines.flow.launchIn
@@ -26,11 +27,15 @@ class AllOrdersScreen: Fragment(R.layout.screen_all_orders) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initObservers()
-
         binding.rvOrders.adapter = orderItemAdapter
         binding.swipeRefreshOrders.setOnRefreshListener { actionRefresh() }
-        binding.fabAdd.setOnClickListener { requireActivity().supportFragmentManager.addFragmentToBackStack(R.id.main, AllFoodScreen.newInstance()) }
+        binding.fabAdd.setOnClickListener { requireActivity().supportFragmentManager.addFragmentToBackStack(R.id.main, AllTableFragment.newInstance()) }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initObservers()
 
     }
 
@@ -39,7 +44,6 @@ class AllOrdersScreen: Fragment(R.layout.screen_all_orders) {
         allOrdersViewModel.getWaiterOrders()
         allOrdersViewModel.waiterOrdersState.onEach {
                 orderResponseNetworkState ->
-
             if(orderResponseNetworkState.isLoading){
                 binding.swipeRefreshOrders.isRefreshing = true
             }
@@ -58,6 +62,7 @@ class AllOrdersScreen: Fragment(R.layout.screen_all_orders) {
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
+
     }
 
     private fun actionRefresh() {

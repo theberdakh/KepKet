@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
-    android:layout_margin="@dimen/normal_100"
+    android:layout_marginHorizontal="@dimen/normal_100"
+    android:layout_marginVertical="@dimen/small_100"
     android:padding="@dimen/normal_100"
     android:background="@drawable/bg_search_bar">
 

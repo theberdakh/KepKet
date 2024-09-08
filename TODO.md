@@ -1,8 +1,8 @@
 - [x] login 
 - [x] get all orders
 - [x] get all category to chips
+- [x] get all table
 - [ ] get all dishes
-- [ ] get all table 
 - [ ] create order
 - [ ] get order by id 
 - [ ] get all calls 

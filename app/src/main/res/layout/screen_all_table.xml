@@ -2,38 +2,44 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_toolbar"
-        app:title="@string/app_name" />
+        app:title="@string/title_tables" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshOrders"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="76dp"
-        android:background="@drawable/bg_list_container">
+        android:background="@drawable/bg_list_container"
+        android:padding="@dimen/small_100">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvOrders"
+            android:id="@+id/rvTables"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            tools:listitem="@layout/item_table" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ImageButton
         android:id="@+id/fabAdd"
+        android:visibility="gone"
         android:layout_width="@dimen/fab_width"
         android:layout_height="@dimen/fab_height"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/normal_100"
         android:background="@drawable/bg_gradient_oval"
         android:contentDescription="@string/cd_add"
-        android:src="@drawable/ic_add" />
+        android:src="@drawable/ic_done"
+        />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

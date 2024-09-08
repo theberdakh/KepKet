@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            android:background="@drawable/bg_rounded_gradient_button"
+            android:background="@drawable/bg_gradient_rounded_rectangle"
             android:layout_marginVertical="@dimen/normal_100"
             android:padding="@dimen/small_100">
 
