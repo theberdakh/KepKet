@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.DiffUtil
 
 data class ChipItem(
-    @DrawableRes val icon: Int,
+    @DrawableRes val icon: Int? = null,
     val title: String
 )
 

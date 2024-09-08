@@ -10,5 +10,6 @@ class OrderItemViewHolder(private val binding: ItemOrderBinding): RecyclerView.V
         binding.title.text = orderItem.meals.joinToString(separator = ", ")
         binding.subtitle.text = orderItem.status
         binding.tableNumber.text = orderItem.tableNumber.toString()
+        binding.price.text = orderItem.totalPrice.toString()
     }
 }

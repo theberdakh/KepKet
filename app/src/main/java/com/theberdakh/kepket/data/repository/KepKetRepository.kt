@@ -25,4 +25,11 @@ class KepKetRepository(private val kepKetApi: KepKetApi) {
         emit(ResultModel.error(it))
     }
 
+    fun getAllCategories(restaurantId: String) = flow {
+        val response = kepKetApi.getAllFoodCategory(restaurantId)
+        emit(ResultModel.success(response))
+    }.catch {
+        emit(ResultModel.error(it))
+    }
+
 }

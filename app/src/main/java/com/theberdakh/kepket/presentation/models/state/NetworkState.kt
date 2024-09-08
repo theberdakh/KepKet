@@ -1,4 +1,4 @@
-package com.theberdakh.kepket.presentation.statemanagers
+package com.theberdakh.kepket.presentation.models.state
 
 import com.theberdakh.kepket.data.remote.models.ResultModel
 

@@ -10,6 +10,7 @@ data class OrderResponse(
     @SerializedName("_id")
     val id: String,
     val createdAt: String,
+    val totalPrice: Int,
     val meals: List<MealResponse>,
     val restaurantId: String,
     val status: String,
@@ -23,6 +24,7 @@ fun OrderResponse.toOrderItem(): OrderItem {
         id = this.id,
         meals = this.meals.map { mealResponse -> mealResponse.name },
         status = this.status,
+        totalPrice = this.totalPrice,
         tableNumber = this.table.number
     )
 }

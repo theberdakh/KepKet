@@ -5,7 +5,8 @@ import com.theberdakh.kepket.databinding.ItemChipBinding
 import com.theberdakh.kepket.presentation.models.ChipItem
 
 class ChipItemViewHolder(private val binding: ItemChipBinding): RecyclerView.ViewHolder(binding.root) {
-    fun bind(chipItem: ChipItem){
 
+    fun bind(chipItem: ChipItem){
+        binding.title.text = chipItem.title
     }
 }

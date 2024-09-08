@@ -12,4 +12,5 @@
     <string name="menu">Menyu</string>
     <string name="hint_search">Izlew</string>
     <string name="cd_food_image">Food image</string>
+    <string name="cd_chip_icon">Chip icon</string>
 </resources>

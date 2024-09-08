@@ -12,7 +12,6 @@ import com.theberdakh.kepket.data.remote.models.errorMessage
 import com.theberdakh.kepket.databinding.ScreenAllOrdersBinding
 import com.theberdakh.kepket.presentation.adapters.OrderItemAdapter
 import com.theberdakh.kepket.presentation.screens.allfoods.AllFoodScreen
-import com.theberdakh.kepket.presentation.statemanagers.allorders.AllOrdersViewModel
 import com.theberdakh.navigation.NavigationExtensions.addFragmentToBackStack
 import com.theberdakh.viewbinding.viewBinding
 import kotlinx.coroutines.flow.launchIn
@@ -36,6 +35,7 @@ class AllOrdersScreen: Fragment(R.layout.screen_all_orders) {
     }
 
     private fun initObservers() {
+
         allOrdersViewModel.getWaiterOrders()
         allOrdersViewModel.waiterOrdersState.onEach {
                 orderResponseNetworkState ->
