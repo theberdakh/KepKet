@@ -1,6 +1,5 @@
 package com.theberdakh.kepket.di
 
-import com.theberdakh.GlideLoader
 import com.theberdakh.kepket.presentation.screens.allfoods.AllFoodScreenViewModel
 import com.theberdakh.kepket.presentation.screens.allorders.AllOrdersViewModel
 import com.theberdakh.kepket.presentation.screens.login.LoginViewModel
