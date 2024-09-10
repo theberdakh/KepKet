@@ -42,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="match_parent"
-            android:gravity="start"
+            android:gravity="start|center_vertical"
             android:textAppearance="@style/TextAppearance.KepKet.Black"
             android:textColor="@color/bright_green"
             android:textSize="18sp"

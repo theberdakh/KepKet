@@ -8,6 +8,11 @@
 - [ ] get all calls 
 
 
+- [ ] search foods 
+- [ ] sort food with chips 
+- [ ] add header to foods 
+- 
+
 
 
 Figma: https://www.figma.com/design/cxyDTCdIgpN7pOVsSBXxNS/ssss?node-id=0-1&node-type=CANVAS
