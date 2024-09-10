@@ -7,8 +7,10 @@ import com.theberdakh.kepket.data.remote.models.ResultModel
 import com.theberdakh.kepket.data.remote.models.Status
 import com.theberdakh.kepket.data.remote.models.category.CategoryResponse
 import com.theberdakh.kepket.data.remote.models.category.toChipItem
+import com.theberdakh.kepket.data.remote.models.food.toFoodItem
 import com.theberdakh.kepket.data.repository.KepKetRepository
 import com.theberdakh.kepket.presentation.models.ChipItem
+import com.theberdakh.kepket.presentation.models.FoodItem
 import com.theberdakh.kepket.presentation.models.state.NetworkState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,8 +28,7 @@ class AllFoodScreenViewModel(
     internal val allFoodCategoryFlow: StateFlow<NetworkState<List<ChipItem>>> =
         _allFoodCategoryFlow.asStateFlow()
 
-    fun getAllFoodCategories(restaurantId: String = localPreferences.getUserInfo().restaurantId) =
-        viewModelScope.launch {
+    fun getAllFoodCategories(restaurantId: String = localPreferences.getUserInfo().restaurantId) = viewModelScope.launch {
             kepKetRepository.getAllCategories(restaurantId).onStart {
                 _allFoodCategoryFlow.value = NetworkState(isLoading = true)
             }.catch { e ->
@@ -51,4 +52,32 @@ class AllFoodScreenViewModel(
 
             }
         }
+
+    private val _allFoodsFlow = MutableStateFlow(NetworkState<List<FoodItem>>())
+    internal val allFoodsFlow: StateFlow<NetworkState<List<FoodItem>>> = _allFoodsFlow.asStateFlow()
+    fun getAllFoods(restaurantId: String = localPreferences.getUserInfo().restaurantId) = viewModelScope.launch {
+        kepKetRepository.getAllFoods(restaurantId).onStart {
+            _allFoodsFlow.value = NetworkState(isLoading = true)
+        }.catch { e ->
+            _allFoodsFlow.value =
+                NetworkState(isLoading = false, result = ResultModel.error(e))
+        }.collect {data ->
+            when (data.status) {
+                Status.SUCCESS -> {
+                    val foods = data.data?.map { food ->
+                        food.toFoodItem()
+                    }
+                    _allFoodsFlow.value =
+                        NetworkState(isLoading = false, result = ResultModel.success(foods))
+                }
+
+                Status.ERROR -> _allFoodsFlow.value =
+                    NetworkState(isLoading = false, result = data.errorThrowable?.let {
+                        ResultModel.error(it)
+                    })
+            }
+        }
+
+    }
+
 }

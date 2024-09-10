@@ -3,8 +3,6 @@
     <style name="Base.Theme.KepKet" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/bg_gradient</item>
         <item name="android:textColorPrimary">@color/black</item>
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
     <style name="Theme.KepKet" parent="Base.Theme.KepKet" />

@@ -45,7 +45,7 @@ fun provideRetrofit(localPreferences: LocalPreferences): Retrofit {
         .addInterceptor(tokenInterceptor)
         .build()
 
-        return Retrofit.Builder()
+    return Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
         .baseUrl("https://kep-ket-api.vercel.app")
         .client(client)

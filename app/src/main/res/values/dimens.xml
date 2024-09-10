@@ -29,6 +29,7 @@
     <dimen name="logo_height">70dp</dimen>
     <dimen name="fab_width">48dp</dimen>
     <dimen name="fab_height">48dp</dimen>
+    <dimen name="small_25">2dp</dimen>
 
 
 </resources>

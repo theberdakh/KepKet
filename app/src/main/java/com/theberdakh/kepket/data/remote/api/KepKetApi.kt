@@ -1,6 +1,7 @@
 package com.theberdakh.kepket.data.remote.api
 
 import com.theberdakh.kepket.data.remote.models.category.CategoryResponse
+import com.theberdakh.kepket.data.remote.models.food.FoodResponse
 import com.theberdakh.kepket.data.remote.models.login.LoginRequest
 import com.theberdakh.kepket.data.remote.models.login.LoginResponse
 import com.theberdakh.kepket.data.remote.models.notifications.OrderResponse
@@ -25,5 +26,11 @@ interface KepKetApi {
 
     @GET("api/table/all-tables/{restaurantId}")
     suspend fun getAllTables(@Path("restaurantId") restaurantId: String): List<TableResponse>
+
+    @GET("api/dishes/{restaurantId}")
+    suspend fun getAllFoods(@Path("restaurantId") restaurantId: String): List<FoodResponse>
+
+    @POST("api/orders/waiter-order")
+    suspend fun createOrder()
 
 }

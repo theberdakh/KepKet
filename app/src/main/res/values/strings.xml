@@ -16,4 +16,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_tables">Stollar</string>
+    <string name="title_send_order">Buyırtpa beriw</string>
+    <string name="summa">Summa</string>
+    <string name="table_number">№ %1$s</string>
 </resources>

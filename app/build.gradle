@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -46,6 +47,9 @@ dependencies {
     implementation libs.androidx.constraintlayout
     implementation libs.androidx.swiperefreshlayout
 
+    //For bottom sheet behavior
+    implementation(libs.material)
+
     //Retrofit
     implementation libs.retrofit
     implementation(libs.converter.gson)
@@ -60,5 +64,8 @@ dependencies {
 
     //Websocket
     implementation (libs.socket.io.client)
+
+    //Image Loading
+    implementation(libs.glide)
 
 }

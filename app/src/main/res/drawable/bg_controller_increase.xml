@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <padding android:top="@dimen/small_25"
+                android:left="@dimen/small_25"
+                android:right="@dimen/small_25"/>
+            <corners android:topLeftRadius="@dimen/normal_100"
+                android:topRightRadius="@dimen/normal_100"/>
+            <solid android:color="@color/light_azure"/>
+        </shape>
+    </item>
+    <item>
+        <bitmap android:src="@drawable/ic_increase"/>
+    </item>
+</layer-list>
