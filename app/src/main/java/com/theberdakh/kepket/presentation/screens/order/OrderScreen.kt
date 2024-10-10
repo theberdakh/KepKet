@@ -5,14 +5,21 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.theberdakh.extensions.ViewExtensions.gone
+import com.theberdakh.extensions.ViewExtensions.visible
 import com.theberdakh.kepket.R
+import com.theberdakh.kepket.data.remote.models.Status
+import com.theberdakh.kepket.data.remote.models.errorMessage
 import com.theberdakh.kepket.databinding.ScreenOrderBinding
 import com.theberdakh.kepket.presentation.adapters.FoodItemControllerAdapter
 import com.theberdakh.kepket.presentation.models.FoodItem
 import com.theberdakh.kepket.presentation.models.TableItem
+import com.theberdakh.kepket.presentation.screens.allorders.AllOrdersScreen
 import com.theberdakh.kepket.presentation.screens.login.LoginViewModel
+import com.theberdakh.navigation.NavigationExtensions.addFragment
 import com.theberdakh.viewbinding.viewBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -51,9 +58,6 @@ class OrderScreen: Fragment(R.layout.screen_order) {
             requireActivity().supportFragmentManager.popBackStack()
         }
 
-        Log.d("Foods", "$selectedFoods")
-        Log.d("Foods", "$selectedTable")
-
         selectedFoods?.let {
             orderScreenViewModel.addFoods(it)
             orderScreenViewModel.getTotalPrice()
@@ -70,6 +74,12 @@ class OrderScreen: Fragment(R.layout.screen_order) {
             orderScreenViewModel.decreaseQuantity(foodItem)
         }
 
+        binding.signInLoginBtn.setOnClickListener {
+            selectedTable?.let {
+                orderScreenViewModel.createOrder(it)
+            }
+        }
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -77,14 +87,32 @@ class OrderScreen: Fragment(R.layout.screen_order) {
       orderScreenViewModel.allFoods.onEach {
           foodItemControllerAdapter.submitList(it)
           foodItemControllerAdapter.notifyDataSetChanged()
-          Log.d("allfoodsstate", "${it}")
       }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         orderScreenViewModel.totalPriceState.onEach {
             binding.summa.text = it.toString()
-            Log.d("allfoodsstate", "${it}")
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
+        orderScreenViewModel.createOrderState.onEach {
+            if (it.isLoading){
+                binding.sendOrderText.gone()
+                binding.sendOrderProgress.visible()
+            }
+            if (it.result != null){
+                when(it.result.status){
+                    Status.SUCCESS -> {
+                        binding.sendOrderProgress.gone()
+                        binding.sendOrderText.visible()
+                        requireActivity().supportFragmentManager.addFragment(R.id.main, AllOrdersScreen.newInstance())
+                    }
+                    Status.ERROR -> {
+                        binding.sendOrderProgress.gone()
+                        binding.sendOrderText.visible()
+                        Toast.makeText(requireContext(), it.result.errorThrowable?.errorMessage, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
     }
 
@@ -92,6 +120,8 @@ class OrderScreen: Fragment(R.layout.screen_order) {
 
         @JvmStatic
         fun newInstance(foods: ArrayList<FoodItem>, tableItem: TableItem) = OrderScreen().apply {
+            selectedFoods = null
+            selectedTable = null
             arguments = Bundle().apply {
                 putParcelableArrayList(ARG_SELECTED_FOODS, foods)
                 putParcelable(ARG_SELECTED_TABLE, tableItem)

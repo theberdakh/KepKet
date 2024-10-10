@@ -3,6 +3,8 @@ package com.theberdakh.kepket.presentation.models
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
+import com.theberdakh.kepket.data.remote.models.order.OrderDish
+import com.theberdakh.kepket.data.remote.models.order.OrderItem
 import kotlinx.parcelize.Parcelize
 
 
@@ -29,4 +31,11 @@ object FoodItemDiffUtilCallback : DiffUtil.ItemCallback<FoodItem>() {
     override fun areContentsTheSame(oldItem: FoodItem, newItem: FoodItem): Boolean {
         return oldItem == newItem
     }
+}
+
+fun FoodItem.toOrderItem(): OrderItem {
+    return OrderItem(
+        dish = OrderDish(id = this.id, name = this.name, price = this.price),
+        quantity = this.quantity
+    )
 }

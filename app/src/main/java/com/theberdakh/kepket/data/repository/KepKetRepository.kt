@@ -3,6 +3,7 @@ package com.theberdakh.kepket.data.repository
 import com.theberdakh.kepket.data.remote.api.KepKetApi
 import com.theberdakh.kepket.data.remote.models.ResultModel
 import com.theberdakh.kepket.data.remote.models.login.LoginRequest
+import com.theberdakh.kepket.data.remote.models.order.CreateOrderRequest
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 
@@ -38,6 +39,13 @@ class KepKetRepository(private val kepKetApi: KepKetApi) {
 
     fun getAllFoods(restaurantId: String) = flow {
         val response = kepKetApi.getAllFoods(restaurantId)
+        emit(ResultModel.success(response))
+    }.catch {
+        emit(ResultModel.error(it))
+    }
+
+    fun createOrder(createOrderRequest: CreateOrderRequest) = flow {
+        val response = kepKetApi.createOrder(createOrderRequest)
         emit(ResultModel.success(response))
     }.catch {
         emit(ResultModel.error(it))

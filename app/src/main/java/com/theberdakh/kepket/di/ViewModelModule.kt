@@ -23,6 +23,6 @@ val viewModelModule = module {
         AllTableViewModel(kepKetRepository = get(), localPreferences = get())
     }
     viewModel<OrderScreenViewModel>{
-        OrderScreenViewModel()
+        OrderScreenViewModel(repository = get(), localPreferences = get())
     }
 }

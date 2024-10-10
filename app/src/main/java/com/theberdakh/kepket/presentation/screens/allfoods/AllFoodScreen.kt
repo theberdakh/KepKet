@@ -29,7 +29,6 @@ class AllFoodScreen: Fragment(R.layout.screen_all_food) {
     private val viewModel by viewModel<AllFoodScreenViewModel>()
     private val chipItemAdapter by lazy { ChipItemAdapter() }
     private val foodItemAdapter by lazy { FoodItemAdapter() }
-
     private var selectedTable: TableItem? = null
     private val selectedFoods = arrayListOf<FoodItem>()
 
@@ -44,14 +43,27 @@ class AllFoodScreen: Fragment(R.layout.screen_all_food) {
             } else {
                 it.getParcelable(ARG_SELECTED_TABLE)
             }
-
         }
 
     }
 
 
+    override fun onDetach() {
+        super.onDetach()
+        Log.d("AllFoods", "Detach")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("AllFoods", "onPause")
+    }
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Log.d("AllFoods", "Created")
 
         binding.toolbarAllFood.setNavigationOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
@@ -121,7 +133,6 @@ class AllFoodScreen: Fragment(R.layout.screen_all_food) {
         fun newInstance(tableItem: TableItem) = AllFoodScreen().apply {
                 arguments = Bundle().apply {
                     putParcelable(ARG_SELECTED_TABLE, tableItem)
-
                 }
             }
     }

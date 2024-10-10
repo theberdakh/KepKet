@@ -120,7 +120,7 @@
             android:padding="@dimen/normal_100">
 
             <TextView
-                android:id="@+id/loginText"
+                android:id="@+id/sendOrderText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -131,7 +131,7 @@
                 android:textSize="18sp" />
 
             <ProgressBar
-                android:id="@+id/loginProgress"
+                android:id="@+id/sendOrderProgress"
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/large_100"
