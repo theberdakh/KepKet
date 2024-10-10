@@ -3,6 +3,7 @@ package com.theberdakh.kepket.di
 import com.theberdakh.kepket.presentation.screens.allfoods.AllFoodScreenViewModel
 import com.theberdakh.kepket.presentation.screens.allorders.AllOrdersViewModel
 import com.theberdakh.kepket.presentation.screens.login.LoginViewModel
+import com.theberdakh.kepket.presentation.screens.order.OrderScreenViewModel
 import com.theberdakh.kepket.presentation.screens.table.AllTableViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -20,5 +21,8 @@ val viewModelModule = module {
     }
     viewModel<AllTableViewModel>{
         AllTableViewModel(kepKetRepository = get(), localPreferences = get())
+    }
+    viewModel<OrderScreenViewModel>{
+        OrderScreenViewModel()
     }
 }
