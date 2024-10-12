@@ -2,6 +2,7 @@ package com.theberdakh.kepket.di
 
 import com.theberdakh.kepket.presentation.screens.allfoods.AllFoodScreenViewModel
 import com.theberdakh.kepket.presentation.screens.allorders.AllOrdersViewModel
+import com.theberdakh.kepket.presentation.screens.complete.CompleteScreenViewModel
 import com.theberdakh.kepket.presentation.screens.login.LoginViewModel
 import com.theberdakh.kepket.presentation.screens.order.OrderScreenViewModel
 import com.theberdakh.kepket.presentation.screens.table.AllTableViewModel
@@ -24,5 +25,8 @@ val viewModelModule = module {
     }
     viewModel<OrderScreenViewModel>{
         OrderScreenViewModel(repository = get(), localPreferences = get())
+    }
+    viewModel<CompleteScreenViewModel> {
+        CompleteScreenViewModel(repository = get())
     }
 }

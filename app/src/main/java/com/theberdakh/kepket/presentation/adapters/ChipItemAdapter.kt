@@ -9,6 +9,12 @@ import com.theberdakh.kepket.presentation.models.ChipItem
 import com.theberdakh.kepket.presentation.models.ChipItemDiffUtilCallback
 
 class ChipItemAdapter : ListAdapter<ChipItem, ChipItemViewHolder>(ChipItemDiffUtilCallback) {
+
+     private var onChipItemClickListener: ((ChipItem) -> Unit)? = null
+         fun setOnChipItemClickListener(block: ((ChipItem) -> Unit)) {
+             onChipItemClickListener = block
+         }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChipItemViewHolder {
         return ChipItemViewHolder(
             ItemChipBinding.inflate(
@@ -20,7 +26,7 @@ class ChipItemAdapter : ListAdapter<ChipItem, ChipItemViewHolder>(ChipItemDiffUt
     }
 
     override fun onBindViewHolder(holder: ChipItemViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), onChipItemClickListener)
     }
 
 }

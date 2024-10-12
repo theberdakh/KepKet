@@ -16,8 +16,8 @@ class KepKetRepository(private val kepKetApi: KepKetApi) {
         emit(ResultModel.error(it))
     }
 
-    fun getWaiterOrders(waiterId: String) = flow {
-        val response = kepKetApi.getWaiterOrders(waiterId)
+    fun getRestaurantOrders(restaurantId: String) = flow {
+        val response = kepKetApi.getRestaurantOrders(restaurantId)
         emit(ResultModel.success(response))
     }.catch {
         emit(ResultModel.error(it))
@@ -46,6 +46,20 @@ class KepKetRepository(private val kepKetApi: KepKetApi) {
 
     fun createOrder(createOrderRequest: CreateOrderRequest) = flow {
         val response = kepKetApi.createOrder(createOrderRequest)
+        emit(ResultModel.success(response))
+    }.catch {
+        emit(ResultModel.error(it))
+    }
+
+    fun completeOrder(orderId: String) = flow {
+        val response = kepKetApi.completeOrder(orderId)
+        emit(ResultModel.success(response))
+    }.catch {
+        emit(ResultModel.error(it))
+    }
+
+    fun getWaiterNotifications() = flow {
+        val response = kepKetApi.getWaiterNotifications()
         emit(ResultModel.success(response))
     }.catch {
         emit(ResultModel.error(it))

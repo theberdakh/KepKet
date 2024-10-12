@@ -1,6 +1,6 @@
 package com.theberdakh.kepket.data.remote.models.notifications
 
-data class MealResponse(
+data class WaiterNotificationTable(
     val id: String,
-    val name: String
+    val number: Int
 )

@@ -19,4 +19,6 @@
     <string name="title_send_order">Buyırtpa beriw</string>
     <string name="summa">Summa</string>
     <string name="table_number">№ %1$s</string>
+    <string name="title_complete_order">Jetkerildi</string>
+    <string name="template_name_and_quantity">%1$s x %2$s</string>
 </resources>

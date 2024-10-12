@@ -103,7 +103,8 @@ class OrderScreen: Fragment(R.layout.screen_order) {
                     Status.SUCCESS -> {
                         binding.sendOrderProgress.gone()
                         binding.sendOrderText.visible()
-                        requireActivity().supportFragmentManager.addFragment(R.id.main, AllOrdersScreen.newInstance())
+                        Toast.makeText(requireContext(), "Order created!", Toast.LENGTH_SHORT).show()
+                        requireActivity().supportFragmentManager.popBackStack()
                     }
                     Status.ERROR -> {
                         binding.sendOrderProgress.gone()

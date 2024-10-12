@@ -11,13 +11,14 @@ import com.theberdakh.kepket.data.remote.models.Status
 import com.theberdakh.kepket.data.remote.models.errorMessage
 import com.theberdakh.kepket.databinding.ScreenAllOrdersBinding
 import com.theberdakh.kepket.presentation.adapters.OrderItemAdapter
-import com.theberdakh.kepket.presentation.screens.allfoods.AllFoodScreen
+import com.theberdakh.kepket.presentation.screens.complete.CompleteScreen
 import com.theberdakh.kepket.presentation.screens.table.AllTableFragment
 import com.theberdakh.navigation.NavigationExtensions.addFragmentToBackStack
 import com.theberdakh.viewbinding.viewBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.ArrayList
 
 class AllOrdersScreen: Fragment(R.layout.screen_all_orders) {
     private val binding by viewBinding<ScreenAllOrdersBinding>()
@@ -30,6 +31,16 @@ class AllOrdersScreen: Fragment(R.layout.screen_all_orders) {
         binding.rvOrders.adapter = orderItemAdapter
         binding.swipeRefreshOrders.setOnRefreshListener { actionRefresh() }
         binding.fabAdd.setOnClickListener { requireActivity().supportFragmentManager.addFragmentToBackStack(R.id.main, AllTableFragment.newInstance()) }
+        orderItemAdapter.setOnOrderItemClickListener { orderItem ->
+            requireActivity().supportFragmentManager.addFragmentToBackStack(R.id.main, CompleteScreen.newInstance(
+                ArrayList(orderItem.meals),
+                tableNumber = orderItem.tableNumber,
+                totalPrice = orderItem.totalPrice,
+                orderId = orderItem.id,
+                orderStatus = orderItem.status
+            ))
+        }
+
 
     }
 
@@ -41,8 +52,8 @@ class AllOrdersScreen: Fragment(R.layout.screen_all_orders) {
 
     private fun initObservers() {
 
-        allOrdersViewModel.getWaiterOrders()
-        allOrdersViewModel.waiterOrdersState.onEach {
+        allOrdersViewModel.getWaiterNotifications()
+        allOrdersViewModel.waiterNotificationsState.onEach {
                 orderResponseNetworkState ->
             if(orderResponseNetworkState.isLoading){
                 binding.swipeRefreshOrders.isRefreshing = true
@@ -66,7 +77,7 @@ class AllOrdersScreen: Fragment(R.layout.screen_all_orders) {
     }
 
     private fun actionRefresh() {
-        allOrdersViewModel.getWaiterOrders()
+        allOrdersViewModel.getWaiterNotifications()
         orderItemAdapter.submitList(null)
         binding.swipeRefreshOrders.isRefreshing = false
     }

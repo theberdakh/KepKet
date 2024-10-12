@@ -1,10 +1,9 @@
 package com.theberdakh.kepket.presentation.models
 
-import android.os.Parcel
 import android.os.Parcelable
 import androidx.recyclerview.widget.DiffUtil
 import com.theberdakh.kepket.data.remote.models.order.OrderDish
-import com.theberdakh.kepket.data.remote.models.order.OrderItem
+import com.theberdakh.kepket.data.remote.models.order.CreateOrderItem
 import kotlinx.parcelize.Parcelize
 
 
@@ -33,8 +32,8 @@ object FoodItemDiffUtilCallback : DiffUtil.ItemCallback<FoodItem>() {
     }
 }
 
-fun FoodItem.toOrderItem(): OrderItem {
-    return OrderItem(
+fun FoodItem.toOrderItem(): CreateOrderItem {
+    return CreateOrderItem(
         dish = OrderDish(id = this.id, name = this.name, price = this.price),
         quantity = this.quantity
     )

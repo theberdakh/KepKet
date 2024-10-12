@@ -1,13 +1,12 @@
 package com.theberdakh.kepket.presentation.screens.allorders
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.theberdakh.kepket.data.local.LocalPreferences
 import com.theberdakh.kepket.data.remote.models.ResultModel
 import com.theberdakh.kepket.data.remote.models.Status
-import com.theberdakh.kepket.data.remote.models.errorMessage
 import com.theberdakh.kepket.data.remote.models.notifications.toOrderItem
+import com.theberdakh.kepket.data.remote.models.order.toOrderItem
 import com.theberdakh.kepket.data.remote.socket.IOSocketService
 import com.theberdakh.kepket.data.repository.KepKetRepository
 import com.theberdakh.kepket.presentation.models.OrderItem
@@ -35,18 +34,57 @@ class AllOrdersViewModel(
         }
     }
 
-    private val _waiterOrdersState = MutableStateFlow(NetworkState<List<OrderItem>>())
-    internal val waiterOrdersState: StateFlow<NetworkState<List<OrderItem>>> =
-        _waiterOrdersState.asStateFlow()
+    private val _waiterNotificationsState = MutableStateFlow(NetworkState<List<OrderItem>>())
+    internal val waiterNotificationsState: StateFlow<NetworkState<List<OrderItem>>> = _waiterNotificationsState.asStateFlow()
 
-    fun getWaiterOrders(waiterId: String = localPreferences.getUserInfo().id) =
+    fun getWaiterNotifications() = viewModelScope.launch {
+        kepKetRepository.getWaiterNotifications()
+            .onStart { _waiterNotificationsState.emit(NetworkState(isLoading = true)) }
+            .catch { e ->
+                _waiterNotificationsState.emit(
+                    NetworkState(
+                        isLoading = false,
+                        result = ResultModel.error(e)
+                    )
+                )
+            }.collect { orderResponse ->
+                when (orderResponse.status) {
+                    Status.SUCCESS -> {
+                        val orderItems = mutableListOf<OrderItem>()
+                        orderResponse.data?.pending?.forEach { order ->
+                            val orderItem = order.toOrderItem()
+                            orderItems.add(orderItem)
+                        }
+                        if (orderResponse.data != null){
+                            println(orderResponse.data)
+                        }
+                        _waiterNotificationsState.value = NetworkState(
+                            isLoading = false,
+                            ResultModel.success(orderItems)
+                        )
+                    }
+
+                    Status.ERROR -> {
+                        _waiterNotificationsState.value = NetworkState(
+                            isLoading = false,
+                            orderResponse.errorThrowable?.let { ResultModel.error(it) }
+                        )
+                    }
+                }
+            }
+    }
+
+
+    private val _restaurantOrdersState = MutableStateFlow(NetworkState<List<OrderItem>>())
+    internal val restaurantOrdersState: StateFlow<NetworkState<List<OrderItem>>> =
+        _restaurantOrdersState.asStateFlow()
+
+    fun getRestaurantOrders(restaurantId: String = localPreferences.getUserInfo().restaurantId) =
         viewModelScope.launch {
-            Log.d("Orders", "$waiterId")
-            Log.d("Token", "${localPreferences.getToken()}")
-            kepKetRepository.getWaiterOrders(waiterId)
-                .onStart { _waiterOrdersState.emit(NetworkState(isLoading = true)) }
+            kepKetRepository.getRestaurantOrders(restaurantId)
+                .onStart { _restaurantOrdersState.emit(NetworkState(isLoading = true)) }
                 .catch { e ->
-                    _waiterOrdersState.emit(
+                    _restaurantOrdersState.emit(
                         NetworkState(
                             isLoading = false,
                             result = ResultModel.error(e)
@@ -55,26 +93,22 @@ class AllOrdersViewModel(
                 }.collect { orderResponse ->
                     when (orderResponse.status) {
                         Status.SUCCESS -> {
-                            Log.d("Order", "Success")
                             val orderItems = mutableListOf<OrderItem>()
                             orderResponse.data?.forEach { order ->
                                 val orderItem = order.toOrderItem()
                                 orderItems.add(orderItem)
                             }
-
                             if (orderResponse.data != null){
                                 println(orderResponse.data)
                             }
-
-                            _waiterOrdersState.value = NetworkState(
+                            _restaurantOrdersState.value = NetworkState(
                                 isLoading = false,
                                 ResultModel.success(orderItems)
                             )
                         }
 
                         Status.ERROR -> {
-                            Log.d("Order", "Error: ${orderResponse.errorThrowable?.errorMessage}")
-                            _waiterOrdersState.value = NetworkState(
+                            _restaurantOrdersState.value = NetworkState(
                                 isLoading = false,
                                 orderResponse.errorThrowable?.let { ResultModel.error(it) }
                             )

@@ -1,25 +1,10 @@
 package com.theberdakh.kepket.presentation.models
 
 import androidx.recyclerview.widget.DiffUtil
-import com.theberdakh.kepket.data.remote.models.notifications.MealResponse
 
-/*
-* data class OrderResponse(
-    @SerializedName("__v")
-    val v: Int,
-    @SerializedName("_id")
-    val id: String,
-    val createdAt: String,
-    val meals: List<MealResponse>,
-    val restaurantId: String,
-    val status: String,
-    val table: TableResponse,
-    val updatedAt: String,
-    val waiter: WaiterResponse
-)*/
 data class OrderItem(
     val id: String,
-    val meals: List<String>,
+    val meals: List<MealItem>,
     val status: String,
     val totalPrice: Int,
     val tableNumber: Int
