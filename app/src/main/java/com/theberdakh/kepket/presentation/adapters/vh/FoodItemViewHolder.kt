@@ -21,10 +21,7 @@ class FoodItemViewHolder(private val binding: ItemFoodAddBinding): RecyclerView.
         binding.price.text = item.price.toString()
 
         binding.btnAdd.setOnClickListener {
-            if (item.quantity == FoodItem.QUANTITY_ZERO) {
-                binding.btnAdd.setImageResource(R.drawable.ic_done)
-                item.quantity += 1
-            }
+            binding.btnAdd.setImageResource(R.drawable.ic_done)
             onAddClick?.invoke(item)
         }
     }

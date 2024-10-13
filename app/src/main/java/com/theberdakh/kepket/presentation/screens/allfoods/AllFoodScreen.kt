@@ -115,15 +115,16 @@ class AllFoodScreen : Fragment(R.layout.screen_all_food) {
         binding.rvFoods.adapter = foodItemAdapter
 
         foodItemAdapter.setOnFoodItemClickListener { food ->
-            selectedFoods.add(food)
+            if (food.quantity == 0) {
+                selectedFoods.add(food)
+                food.quantity +=1
+            }
         }
 
         binding.fabBasket.setOnClickListener {
             selectedTable?.let {
-                val orderScreen =
-                    OrderScreen.newInstance(foods = selectedFoods, tableItem = selectedTable!!)
-                requireActivity().supportFragmentManager.addFragmentToBackStack(
-                    R.id.main,
+                val orderScreen = OrderScreen.newInstance(foods = selectedFoods, tableItem = selectedTable!!)
+                requireActivity().supportFragmentManager.addFragmentToBackStack(R.id.main,
                     orderScreen
                 )
             }
