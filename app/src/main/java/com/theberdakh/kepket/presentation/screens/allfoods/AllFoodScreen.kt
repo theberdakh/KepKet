@@ -59,6 +59,7 @@ class AllFoodScreen : Fragment(R.layout.screen_all_food) {
         parentFragmentManager.addOnBackStackChangedListener {
             if (isVisible) {
                 selectedFoods.clear()
+                requireActivity().supportFragmentManager.popBackStack()
             }
         }
 
