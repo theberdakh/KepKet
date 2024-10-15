@@ -4,12 +4,12 @@ import com.google.gson.annotations.SerializedName
 import com.theberdakh.kepket.presentation.models.MealItem
 
 data class WaiterNotificationMeal(
-    val foodName: String,
+    val foodImage: String,
     val foodId: String,
     val foodPrice: Int,
-    @SerializedName("quantitiy")
+    val foodName: String,
     val quantity: Int,
-    val foodImage: String
+
 )
 
 fun WaiterNotificationMeal.toMealItem(): MealItem {

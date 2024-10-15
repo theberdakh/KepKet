@@ -51,6 +51,8 @@ class CompleteScreen: Fragment(R.layout.screen_complete) {
             } else {
                 it.getParcelableArrayList(ARG_FOODS)
             }
+
+            Log.d("Foods", foods.toString())
         }
     }
 

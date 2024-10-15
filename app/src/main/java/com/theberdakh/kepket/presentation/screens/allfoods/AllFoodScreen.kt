@@ -56,10 +56,26 @@ class AllFoodScreen : Fragment(R.layout.screen_all_food) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        parentFragmentManager.setFragmentResultListener(REQUEST_KEY, this){ requestKey, bundle ->
+            Log.d("Key", requestKey)
+            if (requestKey == REQUEST_KEY) {
+                val result = bundle.getString(KEY_ORDER)
+                Log.d("Key", "result: $result")
+                result?.let {
+                    Log.d("Key", "resylt: $it")
+                    if (it == KEY_ORDER_SEND){
+                        requireActivity().supportFragmentManager.popBackStack()
+                    }
+                }
+            }
+
+
+        }
+
         parentFragmentManager.addOnBackStackChangedListener {
             if (isVisible) {
                 selectedFoods.clear()
-                requireActivity().supportFragmentManager.popBackStack()
+
             }
         }
 
@@ -195,6 +211,11 @@ class AllFoodScreen : Fragment(R.layout.screen_all_food) {
     }
 
     companion object {
+
+        const val REQUEST_KEY = "requestKey"
+        const val KEY_ORDER = "order_key"
+        const val KEY_ORDER_SEND = "order_send"
+        const val KEY_ORDER_NOT_SEND = "order_not_send"
 
         @JvmStatic
         fun newInstance(tableItem: TableItem) = AllFoodScreen().apply {
