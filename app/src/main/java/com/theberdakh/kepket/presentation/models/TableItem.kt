@@ -7,7 +7,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class TableItem(
     val id: String,
-    val tableNumber: Int
+    val tableNumber: Int,
+    val isBusy: Boolean
 ): Parcelable
 
 object TableItemDiffUtilCallback: DiffUtil.ItemCallback<TableItem>(){

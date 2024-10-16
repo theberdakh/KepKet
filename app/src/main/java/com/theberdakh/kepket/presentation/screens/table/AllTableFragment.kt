@@ -28,8 +28,17 @@ class AllTableFragment: Fragment(R.layout.screen_all_table) {
 
         binding.rvTables.adapter = tableAdapter
         tableAdapter.setOnTableItemClickListener {
-            requireActivity().supportFragmentManager.replaceFragment(R.id.main, AllFoodScreen.newInstance(it))
+            if (it.isBusy){
+                Toast.makeText(requireContext(), "This table is busy.", Toast.LENGTH_SHORT).show()
+            } else {
+                requireActivity().supportFragmentManager.replaceFragment(R.id.main, AllFoodScreen.newInstance(it))
+            }
+
             Log.d("Table", it.toString())
+        }
+
+        binding.swipeRefreshOrders.setOnRefreshListener {
+            viewModel.getAllTables()
         }
 
     }
@@ -42,13 +51,21 @@ class AllTableFragment: Fragment(R.layout.screen_all_table) {
     private fun initObservers() {
         viewModel.getAllTables()
         viewModel.allTablesFlow.onEach { data ->
+            binding.swipeRefreshOrders.isRefreshing = data.isLoading
             if(data.isLoading) {
                 Log.d("Categories", "Loading...")
             }
             if (data.result != null){
                 when(data.result.status){
                     Status.SUCCESS -> tableAdapter.submitList(data.result.data)
-                    Status.ERROR -> Toast.makeText(requireContext(), data.result.errorThrowable?.errorMessage, Toast.LENGTH_SHORT).show()
+                    Status.ERROR -> {
+                        Log.d("Tables", "${data.result.errorThrowable?.errorMessage}")
+                        Toast.makeText(
+                            requireContext(),
+                            data.result.errorThrowable?.errorMessage,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)

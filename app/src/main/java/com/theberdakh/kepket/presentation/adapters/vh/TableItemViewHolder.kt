@@ -10,8 +10,13 @@ class TableItemViewHolder(private val binding: ItemTableBinding) : RecyclerView.
     fun bind(item: TableItem, onClick: ((TableItem) -> Unit)?) {
 
         binding.title.text = item.tableNumber.toString()
+        if (item.isBusy){
+            binding.root.setBackgroundResource(R.drawable.bg_busy_table)
+        }
         binding.root.setOnClickListener {
-            binding.root.setBackgroundResource(R.drawable.bg_selected_table)
+            if (!item.isBusy){
+                binding.root.setBackgroundResource(R.drawable.bg_selected_table)
+            }
             onClick?.invoke(item)
         }
     }

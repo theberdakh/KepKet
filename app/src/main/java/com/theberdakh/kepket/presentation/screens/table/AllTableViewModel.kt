@@ -1,5 +1,6 @@
 package com.theberdakh.kepket.presentation.screens.table
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.theberdakh.kepket.data.local.LocalPreferences
@@ -37,13 +38,20 @@ class AllTableViewModel(
                 .collect { data ->
                     when (data.status) {
                         Status.SUCCESS -> {
-                            val tables = data.data?.map {
-                                it.toTableItem()
+                            data.data?.let {  tableResponse ->
+                                val tables = tableResponse.tables.map {
+                                    it.toTableItem()
+                                }
+                                Log.d("Tables", tableResponse.toString())
+                                Log.d("Tables", tables.toString())
+                                _allTablesFlow.value = NetworkState(isLoading = false, result = ResultModel.success(tables))
                             }
-                            _allTablesFlow.value = NetworkState(
+
+                       /*     _allTablesFlow.value = NetworkState(
                                 isLoading = false,
-                                result = ResultModel.success(tables)
-                            )
+                                result = ResultModel.success(ts)
+                            )*/
+
                         }
 
                         Status.ERROR -> {
