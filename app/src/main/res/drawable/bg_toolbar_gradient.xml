@@ -5,6 +5,7 @@
         android:startColor="@color/bright_green"
         android:endColor="@color/dark_green"
         android:type="linear"
+        android:angle="270"
         />
     <corners android:bottomRightRadius="@dimen/large_100" />
 

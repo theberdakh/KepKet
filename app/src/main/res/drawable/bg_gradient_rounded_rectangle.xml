@@ -4,6 +4,6 @@
         android:startColor="@color/bright_green"
         android:endColor="@color/dark_green"
         android:type="linear"
-        android:angle="240"/>
+        android:angle="180"/>
     <corners android:radius="@dimen/normal_100"/>
 </shape>

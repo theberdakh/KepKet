@@ -2,15 +2,17 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <padding android:bottom="@dimen/small_25"
+            <padding
+                android:bottom="@dimen/small_25"
                 android:left="@dimen/small_25"
-                android:right="@dimen/small_25"/>
-            <corners android:bottomLeftRadius="@dimen/normal_100"
-                android:bottomRightRadius="@dimen/normal_100"/>
-            <solid android:color="@color/light_azure"/>
+                android:right="@dimen/small_25" />
+            <corners
+                android:bottomLeftRadius="@dimen/normal_100"
+                android:bottomRightRadius="@dimen/normal_100" />
+            <solid android:color="@color/light_azure" />
         </shape>
     </item>
     <item>
-        <bitmap android:src="@drawable/ic_decrease"/>
+        <bitmap android:src="@drawable/ic_decrease" />
     </item>
 </layer-list>
